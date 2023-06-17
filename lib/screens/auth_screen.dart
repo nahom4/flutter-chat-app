@@ -50,17 +50,20 @@ class _AuthScreenState extends State<AuthScreen> {
       body: Center(
         child: Column(
           children: [
-            Expanded(
+            
+           Expanded(
               child: Container(
                 decoration: BoxDecoration(
+                     
                     image: DecorationImage(
-                        image: NetworkImage(
-                            "https://cdn.iconscout.com/icon/free/png-256/chat-2639493-2187526.png"))),
+                        image: AssetImage("assets/ethio.jpg"))),
               ),
             ),
-            Text(
-              "Flutter Chat App",
-              style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+            Center(
+              child: Text(
+                "Welcome to ETHIO CHAT",
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
@@ -85,7 +88,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   ],
                 ),
                 style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.black),
+                    backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 79, 112, 210)),
                     padding: MaterialStateProperty.all(
                         EdgeInsets.symmetric(vertical: 12))),
               ),

@@ -50,6 +50,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Search your Friend"),
+        backgroundColor: Colors.black,
       ),
       body: Column(
         children: [

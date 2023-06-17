@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('Home'),
         centerTitle: true,
-        backgroundColor: Colors.teal,
+        backgroundColor: Color.fromARGB(255, 14, 14, 14),
         actions: [
           IconButton(
               onPressed: () async {
@@ -62,37 +62,43 @@ class _HomeScreenState extends State<HomeScreen> {
                       builder: (context, AsyncSnapshot asyncSnapshot) {
                         if (asyncSnapshot.hasData) {
                           var friend = asyncSnapshot.data;
-                          return ListTile(
-                            leading: ClipRRect(
-                              borderRadius: BorderRadius.circular(80),
-                              child: CachedNetworkImage(
-                                imageUrl: friend['image'],
-                                placeholder: (conteext, url) =>
-                                    CircularProgressIndicator(),
-                                errorWidget: (context, url, error) => Icon(
-                                  Icons.error,
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            
+                            child: ListTile(
+                              selectedColor: Colors.blue,
+                              leading: ClipRRect(
+                                borderRadius: BorderRadius.circular(80),
+                                child: CachedNetworkImage(
+                                  imageUrl: friend['image'],
+                                  placeholder: (conteext, url) =>
+                                      CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) => Icon(
+                                    Icons.error,
+                                  ),
+                                  height: 50,
+                                  
                                 ),
-                                height: 50,
                               ),
-                            ),
-                            title: Text(friend['name']),
-                            subtitle: Container(
-                              child: Text(
-                                "$lastMsg",
-                                style: TextStyle(color: Colors.grey),
-                                overflow: TextOverflow.ellipsis,
+                              title: Text(friend['name']),
+                              subtitle: Container(
+                                child: Text(
+                                  "$lastMsg",
+                                  style: TextStyle(color: Colors.grey),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
                               ),
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ChatScreen(
+                                            currentUser: widget.user,
+                                            friendId: friend['uid'],
+                                            friendName: friend['name'],
+                                            friendImage: friend['image'])));
+                              },
                             ),
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ChatScreen(
-                                          currentUser: widget.user,
-                                          friendId: friend['uid'],
-                                          friendName: friend['name'],
-                                          friendImage: friend['image'])));
-                            },
                           );
                         }
                         return LinearProgressIndicator();
