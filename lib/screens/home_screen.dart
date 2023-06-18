@@ -36,20 +36,26 @@ class _HomeScreenState extends State<HomeScreen> {
               icon: Icon(Icons.logout))
         ],
       ),
-      body: StreamBuilder(
-          stream: FirebaseFirestore.instance
-              .collection('users')
-              .doc(widget.user.uid)
-              .collection('messages')
-              .snapshots(),
-          builder: (context, AsyncSnapshot snapshot) {
-            if (snapshot.hasData) {
-              if (snapshot.data.docs.length < 1) {
-                return Center(
-                  child: Text("No Chats Available !"),
-                );
-              }
-              return ListView.builder(
+      body: Container(
+        decoration: BoxDecoration(
+          color: Colors.black
+        ),
+        child: StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection('users')
+                .doc(widget.user.uid)
+                .collection('messages')
+                .snapshots(),
+            builder: (context, AsyncSnapshot snapshot) {
+              
+              if (snapshot.hasData) {
+                if (snapshot.data.docs.length < 1) {
+                  return Center(
+                    child: Text("No Chats Available !"),
+                  );
+                }
+                return ListView.separated(
+                  
                   itemCount: snapshot.data.docs.length,
                   itemBuilder: (context, index) {
                     var friendId = snapshot.data.docs[index].id;
@@ -64,9 +70,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           var friend = asyncSnapshot.data;
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
-                            
                             child: ListTile(
                               selectedColor: Colors.blue,
+                              tileColor: Colors.black,
                               leading: ClipRRect(
                                 borderRadius: BorderRadius.circular(80),
                                 child: CachedNetworkImage(
@@ -77,14 +83,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Icons.error,
                                   ),
                                   height: 50,
-                                  
                                 ),
                               ),
-                              title: Text(friend['name']),
+                              title: Text(friend['name'],
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold
+                              ),),
                               subtitle: Container(
                                 child: Text(
                                   "$lastMsg",
-                                  style: TextStyle(color: Colors.grey),
+                                  style: TextStyle(color: Color.fromARGB(255, 222, 221, 221)),
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ),
@@ -104,12 +113,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         return LinearProgressIndicator();
                       },
                     );
-                  });
-            }
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }),
+                  },
+                  separatorBuilder: ((context, index) {
+                    return Divider(
+                     
+                    );
+                  }),
+                );
+              }
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }),
+      ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.search),
         onPressed: () {

@@ -52,10 +52,11 @@ class ChatScreen extends StatelessWidget {
               child: Container(
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(25),
-                    topRight: Radius.circular(25))),
+                color: Color.fromARGB(255, 0, 0, 0),
+                // borderRadius: BorderRadius.only(
+                //     topLeft: Radius.circular(25),
+                //     topRight: Radius.circular(25))
+                    ),
             child: StreamBuilder(
                 stream: FirebaseFirestore.instance
                     .collection("users")

@@ -16,15 +16,17 @@ class _MessageTextFieldState extends State<MessageTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Color.fromARGB(255, 0, 0, 0),
       padding: EdgeInsetsDirectional.all(8),
       child: Row(
         children: [
           Expanded(
               child: TextField(
+                
             controller: _controller,
             decoration: InputDecoration(
-                labelText: "Send Text",
+              hintText:"Send Text",
+                // labelText: "Send Text",
                 fillColor: Colors.grey[100],
                 filled: true,
                 border: OutlineInputBorder(
@@ -84,6 +86,7 @@ class _MessageTextFieldState extends State<MessageTextField> {
               });
             },
             child: Container(
+              
               padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,

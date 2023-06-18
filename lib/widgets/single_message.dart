@@ -12,11 +12,11 @@ class SingleMessage extends StatelessWidget {
         Container(
             padding: EdgeInsets.all(16),
             margin: EdgeInsets.all(16),
-            constraints: BoxConstraints(maxWidth: 20
-            0),
+            constraints: BoxConstraints(maxWidth: 200
+            ),
             decoration: BoxDecoration(
                 color: isMe
-                    ? Color.fromARGB(255, 0, 0, 0)
+                    ? Color.fromARGB(255, 95, 95, 95)
                     : Color.fromARGB(199, 11, 36, 146),
                 borderRadius: BorderRadius.all(Radius.circular(12))),
             child: Text(

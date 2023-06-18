@@ -52,65 +52,87 @@ class _SearchScreenState extends State<SearchScreen> {
         title: Text("Search your Friend"),
         backgroundColor: Colors.black,
       ),
-      body: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: TextField(
-                    controller: searchController,
-                    decoration: InputDecoration(
-                        hintText: "type username....",
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10))),
+      body: Container(
+       decoration: BoxDecoration(
+        color: Colors.black
+       ),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(color: Colors.black),
+                    child: Padding(
+                
+                      padding: const EdgeInsets.all(15.0),
+                      
+                      child: Container(
+                        // color: Colors.white,
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(15),color: Colors.white),
+                        child: TextField(
+                          
+                          controller: searchController,
+                          decoration: InputDecoration(
+                            
+                              contentPadding: EdgeInsets.only(left:10),
+                              hintText: "type username....",
+                              // border: OutlineInputBorder(
+                              //     borderRadius: BorderRadius.circular(10))
+                              ),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-              IconButton(
-                  onPressed: () {
-                    onSearch();
-                  },
-                  icon: Icon(Icons.search))
-            ],
-          ),
-          if (searchResult.length > 0)
-            Expanded(
-                child: ListView.builder(
-                    itemCount: searchResult.length,
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        leading: CircleAvatar(
-                          child: Image.network(searchResult[index]['image']),
-                        ),
-                        title: Text(searchResult[index]['name']),
-                        subtitle: Text(searchResult[index]['email']),
-                        trailing: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                searchController.text = "";
-                              });
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ChatScreen(
-                                          currentUser: widget.user,
-                                          friendId: searchResult[index]['uid'],
-                                          friendName: searchResult[index]
-                                              ['name'],
-                                          friendImage: searchResult[index]
-                                              ['image'])));
-                            },
-                            icon: Icon(Icons.message)),
-                      );
-                    }))
-          else if (isLoading == true)
-            Center(
-              child: CircularProgressIndicator(),
-            )
-        ],
+                IconButton(
+                    color: Colors.white,
+                    onPressed: () {
+                      onSearch();
+                    },
+                    icon: Icon(Icons.search))
+              ],
+            ),
+            if (searchResult.length > 0)
+              Expanded(
+                  child: ListView.builder(
+                      itemCount: searchResult.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          leading: CircleAvatar(
+                            child: Image.network(searchResult[index]['image']),
+                            
+                          ),
+                          title: Text(searchResult[index]['name']),
+                          subtitle: Text(searchResult[index]['email']),
+                          textColor: Colors.white,
+                          trailing: IconButton(
+                              color:Colors.white ,
+                              onPressed: () {
+                                setState(() {
+                                  searchController.text = "";
+                                });
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ChatScreen(
+                                            currentUser: widget.user,
+                                            friendId: searchResult[index]['uid'],
+                                            friendName: searchResult[index]
+                                                ['name'],
+                                            friendImage: searchResult[index]
+                                                ['image'])));
+                              },
+                              icon: Icon(Icons.message)),
+                        );
+                      }))
+            else if (isLoading == true)
+              Center(
+                child: CircularProgressIndicator(),
+              )
+          ],
+        ),
       ),
     );
   }
